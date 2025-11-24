@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservas</title>
+</head>
+<body>
+<h1>Listado de Reservas</h1>
+
+<a th:href="@{/reservas/nueva}">Nueva Reserva</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Mesa</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="r : ${reservas}">
+            <td th:text="${r.id}"></td>
+            <td th:text="${r.cliente.nombre}"></td>
+            <td th:text="${r.mesa.numero}"></td>
+            <td th:text="${r.fecha}"></td>
+            <td>
+                <a th:href="@{'/reservas/eliminar/' + ${r.id}}">Eliminar</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
