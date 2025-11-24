@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Reservas</title>
+    <title>Reservas</title> <!-- Título de la página -->
 </head>
 <body>
-<h1>Listado de Reservas</h1>
+<h1>Listado de Reservas</h1> <!-- Encabezado principal -->
 
+<!-- Enlace para crear una nueva reserva -->
 <a th:href="@{/reservas/nueva}">Nueva Reserva</a>
 
+<!-- Tabla que muestra todas las reservas -->
 <table border="1">
     <thead>
         <tr>
@@ -19,12 +21,14 @@
         </tr>
     </thead>
     <tbody>
+        <!-- Itera sobre la lista de reservas pasada desde el controlador -->
         <tr th:each="r : ${reservas}">
-            <td th:text="${r.id}"></td>
-            <td th:text="${r.cliente.nombre}"></td>
-            <td th:text="${r.mesa.numero}"></td>
-            <td th:text="${r.fecha}"></td>
+            <td th:text="${r.id}"></td> <!-- Muestra el ID de la reserva -->
+            <td th:text="${r.cliente.nombre}"></td> <!-- Muestra el nombre del cliente -->
+            <td th:text="${r.mesa.numero}"></td> <!-- Muestra el número de mesa -->
+            <td th:text="${r.fecha}"></td> <!-- Muestra la fecha de la reserva -->
             <td>
+                <!-- Enlace para eliminar la reserva -->
                 <a th:href="@{'/reservas/eliminar/' + ${r.id}}">Eliminar</a>
             </td>
         </tr>

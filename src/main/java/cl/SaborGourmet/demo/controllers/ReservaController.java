@@ -20,18 +20,21 @@ public class ReservaController {
     private final ClienteRepository clienteRepo;
     private final MesaRepository mesaRepo;
 
+    // Constructor para inyección de dependencias
     public ReservaController(ReservaService reservaService, ClienteRepository clienteRepo, MesaRepository mesaRepo) {
         this.reservaService = reservaService;
         this.clienteRepo = clienteRepo;
         this.mesaRepo = mesaRepo;
     }
 
+    // Muestra todas las reservas
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("reservas", reservaService.listarReservas());
         return "reservas/lista";
     }
 
+    // Muestra formulario para nueva reserva
     @GetMapping("/nueva")
     public String nuevaReserva(Model model) {
         model.addAttribute("clientes", clienteRepo.findAll());
@@ -39,11 +42,13 @@ public class ReservaController {
         return "reservas/nueva";
     }
 
+    // Guarda una nueva reserva
     @PostMapping("/guardar")
     public String guardarReserva(
             @RequestParam Long clienteId,
             @RequestParam Long mesaId,
             @RequestParam String fecha) {
+
         Cliente cliente = clienteRepo.findById(clienteId).orElse(null);
         Mesa mesa = mesaRepo.findById(mesaId).orElse(null);
         LocalDateTime fechaRes = LocalDateTime.parse(fecha);
@@ -54,6 +59,7 @@ public class ReservaController {
         return "redirect:/reservas";
     }
 
+    // Elimina una reserva
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
         reservaService.eliminar(id);

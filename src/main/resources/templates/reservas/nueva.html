@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Nueva Reserva</title>
+    <title>Nueva Reserva</title> <!-- Título de la página -->
 </head>
 <body>
 
-<h1>Crear Reserva</h1>
+<h1>Crear Reserva</h1> <!-- Encabezado principal -->
 
+<!-- Formulario para crear una nueva reserva -->
 <form th:action="@{/reservas/guardar}" method="post">
 
+    <!-- Selección del cliente -->
     <label>Cliente:</label>
     <select name="clienteId" required>
+        <!-- Itera sobre los clientes disponibles y los muestra en el select -->
         <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nombre}"></option>
     </select>
 
     <br><br>
 
+    <!-- Selección de la mesa -->
     <label>Mesa:</label>
     <select name="mesaId" required>
+        <!-- Itera sobre las mesas disponibles y las muestra en el select -->
         <option th:each="m : ${mesas}" th:value="${m.id}" th:text="'Mesa ' + ${m.numero}"></option>
     </select>
 
     <br><br>
 
+    <!-- Campo para seleccionar la fecha y hora de la reserva -->
     <label>Fecha (YYYY-MM-DDTHH:MM):</label>
     <input type="datetime-local" name="fecha" required>
 
     <br><br>
 
+    <!-- Botón para enviar el formulario -->
     <button type="submit">Guardar</button>
 </form>
 
